@@ -14,12 +14,25 @@ router.post("/usuarios_grupo/:idGrupo/:idAlumno", async (req, res) => {
    res.json(inscripcion)
 })
 
+//Listar todos los integrantes de un grupo (profesor y alumno)
 router.get("/usuarios_grupo/:idGrupo", async (req, res) => {
    const alumnos = await prisma.usuarios_Grupo.findMany({
       where: { grupoId: parseInt(req.params.idGrupo) },
       include: {
          usuario: true
       }
+   })
+   res.json(alumnos)
+})
+
+//Listar todos los alumnos de un grupo
+router.get("/usuarios_grupo/alumnos/:idGrupo", async (req, res) => {
+   const alumnos = await prisma.usuarios_Grupo.findMany({
+      where: {
+         grupoId: parseInt(req.params.idGrupo),
+         rol: false
+      },
+      include: { usuario: true }
    })
    res.json(alumnos)
 })
