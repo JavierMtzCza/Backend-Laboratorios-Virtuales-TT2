@@ -6,7 +6,6 @@ import usuarios_grupoRoutes from "./routes/usuarios_grupo.routes.js";
 import actividadesRoutes from "./routes/actividades.routes.js";
 import preguntasRoutes from "./routes/preguntas.routes.js";
 import laboratoriosRoutes from "./routes/laboratorios.routes.js";
-import preguntas_actividadRoutes from "./routes/preguntas_actividad.routes.js";
 import respuestas_alumnoRoutes from "./routes/respuestas_alumno.routes.js";
 
 const app = express()
@@ -18,7 +17,6 @@ app.use('/api',usuarios_grupoRoutes)
 app.use('/api',actividadesRoutes)
 app.use('/api',preguntasRoutes)
 app.use('/api',laboratoriosRoutes)
-app.use('/api',preguntas_actividadRoutes)
 app.use('/api',respuestas_alumnoRoutes)
 
 app.listen(3000)

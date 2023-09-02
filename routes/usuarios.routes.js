@@ -3,6 +3,12 @@ import { prisma } from "../prisma/conexion.js";
 
 const router = Router()
 
+// Consultar varios usuarios
+router.get("/usuarios", async (req, res) => {
+   const usuarios = await prisma.usuario.findMany()
+   res.json(usuarios)
+})
+
 // Consultar un solo usuario
 router.get("/usuario/:id", async (req, res) => {
    const usuario = await prisma.usuario.findFirst({
@@ -41,13 +47,5 @@ router.delete("/usuario/:id", async (req, res) => {
    })
    res.json(usuario)
 })
-
-// Consultar varios usuarios
-router.get("/usuarios", async (req, res) => {
-   const usuarios = await prisma.usuario.findMany()
-   res.json(usuarios)
-})
-
-
 
 export default router

@@ -57,10 +57,10 @@ model Pregunta {
   actividadId Int
   actividad   Actividad @relation(fields: [actividadId], references: [id])
 
-  Laboratorio   Laboratorio? @relation(fields: [laboratorioId], references: [id])
+  laboratorio   Laboratorio? @relation(fields: [laboratorioId], references: [id])
   laboratorioId Int?
 
-  Respuestas_Alumno Respuestas_Alumno[]
+  respuestas_Alumno Respuestas_Alumno[]
 }
 
 model Laboratorio {
@@ -77,6 +77,7 @@ model Respuestas_Alumno {
   usuario    Usuario  @relation(fields: [usuarioId], references: [id])
   pregunta   Pregunta @relation(fields: [preguntaId], references: [id])
   respuesta  String
+  acierto    Boolean
 
   @@id([preguntaId, usuarioId])
 }
