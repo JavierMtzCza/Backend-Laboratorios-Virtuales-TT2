@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../prisma/conexion.js";
+import { Prisma } from "@prisma/client";
 
 const router = Router()
 
@@ -46,6 +47,25 @@ router.delete("/usuario/:id", async (req, res) => {
       }
    })
    res.json(usuario)
+})
+
+//Verificar si un usuario esta en la base de datos
+router.get("/usuario/login/:correo/:pass", async (req, res) => {
+
+   try {
+      const usuario = await prisma.usuario.findFirstOrThrow({
+         where: { correo: req.params.correo }
+      })
+
+      if (usuario.contrasena == req.params.pass)
+         res.json(usuario)
+      else 
+         res.json({ error: "Contrasena no es correcta" })
+      
+   } catch (e) {
+      res.json({ error: "Usuario no encontrado" })
+   }
+
 })
 
 export default router
