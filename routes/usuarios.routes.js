@@ -1,11 +1,10 @@
 import { Router } from "express";
 import { prisma } from "../prisma/conexion.js";
-import { Prisma } from "@prisma/client";
 
 const router = Router()
 
 // Consultar varios usuarios
-router.get("/usuarios", async (req, res) => {
+router.get("/usuario/listar", async (req, res) => {
    const usuarios = await prisma.usuario.findMany()
    res.json(usuarios)
 })
@@ -49,7 +48,7 @@ router.delete("/usuario/:id", async (req, res) => {
    res.json(usuario)
 })
 
-//Verificar si un usuario esta en la base de datos
+//Logeo de un usuario
 router.get("/usuario/login/:correo/:pass", async (req, res) => {
 
    try {
@@ -59,9 +58,9 @@ router.get("/usuario/login/:correo/:pass", async (req, res) => {
 
       if (usuario.contrasena == req.params.pass)
          res.json(usuario)
-      else 
+      else
          res.json({ error: "Contrasena no es correcta" })
-      
+
    } catch (e) {
       res.json({ error: "Usuario no encontrado" })
    }

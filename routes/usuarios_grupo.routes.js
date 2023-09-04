@@ -6,9 +6,9 @@ const router = Router()
 // Inscripcion de un Usuario a un grupo
 router.post("/usuarios_grupo/:idGrupo/:idAlumno", async (req, res) => {
    const inscripcion = await prisma.usuarios_Grupo.create({
-      data: {
-         grupoId: parseInt(req.params.idGrupo),
-         usuarioId: parseInt(req.params.idAlumno)
+      data:{
+         grupoId:parseInt(req.params.idGrupo),
+         usuarioId:parseInt(req.params.idAlumno)
       }
    })
    res.json(inscripcion)
@@ -16,6 +16,9 @@ router.post("/usuarios_grupo/:idGrupo/:idAlumno", async (req, res) => {
 
 //Listar todos los integrantes de un grupo (profesor y alumno)
 router.get("/usuarios_grupo/:idGrupo", async (req, res) => {
+
+   const { IdGrupo } = req.params
+
    const alumnos = await prisma.usuarios_Grupo.findMany({
       where: { grupoId: parseInt(req.params.idGrupo) },
       include: {

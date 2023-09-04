@@ -24,6 +24,8 @@ model Grupo {
   id          Int              @id @default(autoincrement())
   nombre      String           @db.VarChar(50)
   descripcion String
+  clave       String           @unique
+  createAt    DateTime         @default(now())
   actividades Actividad[]
   usuarios    Usuarios_Grupo[]
 }
