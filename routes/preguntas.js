@@ -7,7 +7,7 @@ const upload = multer({ storage: storage })
 const router = Router()
 
 //Creando preguntas de actividad
-router.post("/pregunta/:idActividad", upload.single('multimedia'), async (req, res) => {
+router.post("/:idActividad", upload.single('multimedia'), async (req, res) => {
    const actividad = await prisma.pregunta.create({
       data: {
          pregunta: req.body.pregunta,
@@ -21,7 +21,7 @@ router.post("/pregunta/:idActividad", upload.single('multimedia'), async (req, r
 })
 
 //Creando preguntas de actividad
-router.post("/pregunta/:idActividad/:idLaboratorio", upload.single('multimedia'), async (req, res) => {
+router.post("/:idActividad/:idLaboratorio", upload.single('multimedia'), async (req, res) => {
    const actividad = await prisma.pregunta.create({
       data: {
          pregunta: req.body.pregunta,

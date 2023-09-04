@@ -4,7 +4,7 @@ import { prisma } from "../prisma/conexion.js";
 const router = Router()
 
 //Crear actividad
-router.post("/actividad/:idGrupo", async (req, res) => {
+router.post("/:idGrupo", async (req, res) => {
    const actividad = await prisma.actividad.create({
       data: {
          grupoId: parseInt(req.params.idGrupo),
@@ -15,7 +15,7 @@ router.post("/actividad/:idGrupo", async (req, res) => {
 })
 
 //Listar actividad por medio de un grupo
-router.get("/actividades/:idGrupo", async (req, res) => {
+router.get("/:idGrupo", async (req, res) => {
    const actividades = await prisma.actividad.findMany({
       where: {
          grupoId: parseInt(req.params.idGrupo)

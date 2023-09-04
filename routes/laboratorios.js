@@ -7,7 +7,7 @@ const upload = multer({ storage: storage })
 const router = Router()
 
 //Crear laboratorios
-router.post("/laboratorio", upload.single('imagen'), async (req, res) => {
+router.post("/", upload.single('imagen'), async (req, res) => {
    const laboratorio = await prisma.laboratorio.create({
       data: {
          nombre: req.body.nombre,
@@ -19,7 +19,7 @@ router.post("/laboratorio", upload.single('imagen'), async (req, res) => {
 })
 
 //Listar laboratorios
-router.get("/laboratorios", async (req, res) => {
+router.get("/", async (req, res) => {
    const laboratorios = await prisma.laboratorio.findMany()
    res.send(laboratorios)
 })
